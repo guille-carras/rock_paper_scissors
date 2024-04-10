@@ -1,6 +1,3 @@
-let wins = 0;
-let draws = 0;
-let loses = 0;
 
 function getComputerChoice() {
     let random = Math.floor(Math.random() * 3) + 1;
@@ -17,8 +14,9 @@ function getComputerChoice() {
     }
 }
 
-function playRound(playerSelection, computerSelection) {
+function playRound(playerSelection) {
     let result;
+    let computerSelection = getComputerChoice();
     switch(playerSelection) {
         case 'rock': {
             if (computerSelection === 'rock') {
@@ -66,23 +64,25 @@ function playRound(playerSelection, computerSelection) {
             }
         }
     }
+    console.log(playerSelection, computerSelection);
 }
 
-function playGame() {
-    for (let i = 0; i < 5; i++) {
-        const optionPlayer = prompt('Choose an option between Rock, Paper or Scissors').toLowerCase();
-        const optionCumputer = getComputerChoice();
-        const result = playRound(optionPlayer, optionCumputer);
-        console.log(result);
-    }
-    if(wins > loses) {
-        console.log(`You are the winner! with ${wins} wins.`);
-    } else if (wins < loses) {
-        console.log(`You are the loser with ${loses} defeats, try again! `);
-    } else {
-        console.log(`It's a draw, your wins ${wins} vs the wins of the oponent ${loses}.`);
-    }
-}
+let wins = 0;
+let draws = 0;
+let loses = 0;
+
+
+const containerBtns = document.querySelector('#container');
+const counter = document.querySelector('#counter');
+
+containerBtns.addEventListener('click', (event) => {
+    let target = event.target.id;
+    playRound(target);
+    counter.textContent = `wins: ${wins} draws: ${draws}, and loses: ${loses}`;
+});
+
+
+        
 
 
 
