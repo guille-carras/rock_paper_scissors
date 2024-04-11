@@ -69,33 +69,55 @@ function playRound(playerSelection) {
 
 function winnerOrloser() {
     if (wins === 5) {
-        counter.textContent = `wins: ${wins} draws: ${draws}, and loses: ${loses}\n
+        counter.textContent = `wins: ${wins} draws: ${draws}, and loses: ${loses} \n
         You are the winner`;
 
-        /*Create and insert button inside body*/
+
+        const btns = containerBtns.children;
+        for (btn of btns) {
+            btn.setAttribute('disabled', 'true');
+        };   
+
         const btnReset = document.createElement('button');
-        btnReset.value = 'Reset the game';
-        btnReset.addEventListener('click', resetGame(btnReset));
-        body.appendChild(btnReset);
+        btnReset.textContent = 'Reset game';
+        btnReset.addEventListener('click', resetGame);
+
+        containerBtnReset.appendChild(btnReset);
+        btnReset.addEventListener('click', () => {
+            containerBtnReset.removeChild(btnReset);
+        })
 
     } else if (loses === 5) {
-        counter.textContent = `wins: ${wins} draws: ${draws}, and loses: ${loses}\n
+        counter.textContent = `wins: ${wins} draws: ${draws}, and loses: ${loses} \n
         You are the loser, play again!`;
 
-                /*Create and insert button inside body*/
-                const btnReset = document.createElement('button');
-                btnReset.addEventListener('click', resetGame);
-                body.appendChild(btnReset);
+        const btns = containerBtns.children;
+        for (btn of btns) {
+            btn.setAttribute('disabled', 'true');
+        };
+        
+        const btnReset = document.createElement('button');
+        btnReset.textContent = "Reset game";
+        btnReset.addEventListener('click', resetGame);
+
+        containerBtnReset.appendChild(btnReset);
+        btnReset.addEventListener('click', () => {
+            containerBtnReset.removeChild(btnReset);
+        })
     }
 }
 
-function resetGame (btn) {
+function resetGame () {
     wins = 0;
     draws = 0;
     loses = 0;
 
     counter.textContent = 'let\'s see if luck is on your side';
-    btn.body.removeChild(btn);
+
+    const btns = containerBtns.children;
+    for (btn of btns) {
+        btn.removeAttribute('disabled');
+    };
 }
 
 let wins = 0;
@@ -103,6 +125,7 @@ let draws = 0;
 let loses = 0;
 
 const body = document.querySelector('body');
+const containerBtnReset = document.querySelector('#containerBtnReset');
 const containerBtns = document.querySelector('#container');
 const counter = document.querySelector('#counter');
 
@@ -112,11 +135,6 @@ containerBtns.addEventListener('click', (event) => {
     counter.textContent = `wins: ${wins} draws: ${draws}, and loses: ${loses}`;
     winnerOrloser();
 });
-
-
-        
-
-
 
 
 
