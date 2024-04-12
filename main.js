@@ -69,8 +69,8 @@ function playRound(playerSelection) {
 
 function winnerOrloser() {
     if (wins === 5) {
-        counter.textContent = `wins: ${wins} draws: ${draws}, and loses: ${loses} \n
-        You are the winner`;
+        counter.innerHTML = `wins: ${wins} draws: ${draws}, and loses: ${loses}` + "<br/>" +
+        "You are the winner";
 
 
         const btns = containerBtns.children;
@@ -88,8 +88,8 @@ function winnerOrloser() {
         })
 
     } else if (loses === 5) {
-        counter.textContent = `wins: ${wins} draws: ${draws}, and loses: ${loses} \n
-        You are the loser, play again!`;
+        counter.innerHTML = `wins: ${wins} draws: ${draws}, and loses: ${loses}` + "<br/>" +
+        "You are the loser, play again!";
 
         const btns = containerBtns.children;
         for (btn of btns) {
